@@ -11,7 +11,7 @@
     <h2>{{ name }} watchlist</h2>
     {# 过滤器 #}
     <p>总共{{ movie|length }}个电影</p>
-    <ul>
+    <ul class='movie_list'>
         {% for i in movie %}
             <li>{{ i.title }} - {{ i.year }}</li>
         {% endfor %}
