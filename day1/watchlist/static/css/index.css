@@ -68,3 +68,26 @@ nav ul li a:hover{
     color: cadetblue;
     font-size: 13px;
 }
+.sub{
+    font-size: 12px;
+    padding: 3px 5px;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: white;
+    color: cadetblue;
+    border: 1px solid cadetblue;
+}
+.sub:hover{
+    background-color: cadetblue;
+    color: white;
+    font-weight: bold;
+}
+.alret{
+    position: relative;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid transparent;
+    color: #004085;
+    background-color: #cce5ff;
+    font-weight: bold;
+}

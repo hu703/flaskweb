@@ -12,6 +12,10 @@
 <body>
     <img src="{{ url_for('static', filename='img/bb.jpg') }}" alt="" class='img1'>
     <h2>{{ user.name }} watchlist</h2>
+    <!-- flash消息 -->
+    {% for message in get_flashed_messages() %}
+        <div class='alret'>{{ message }}</div>
+    {% endfor %}
     <nav>
         <ul>
             <li><a href="{{ url_for('index') }}">首页</a></li>

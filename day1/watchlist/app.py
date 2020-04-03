@@ -1,6 +1,6 @@
 import os,sys
 
-from flask import Flask,url_for,render_template
+from flask import Flask,url_for,render_template,request,flash,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy  
 import click
 
@@ -15,6 +15,7 @@ app = Flask(__name__)
 
 app.config['SQLALCHEMY_DATABASE_URI'] =  prefix + os.path.join(app.root_path,'data.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False  # 对内存做优化
+app.config['SECRET_KEY'] = '1903_dev' 
 
 db = SQLAlchemy(app) # 初始化app
 
@@ -32,11 +33,22 @@ class Movie(db.Model):
 
 
 # views 视图函数
-@app.route('/')
+@app.route('/', methods=['GET','POST'])
 def index():
-    
-    user = User.query.first() # 查询出来的用户记录
     movie = Movie.query.all()
+    if request.method == 'POST':
+        g_title = request.form.get('title')
+        g_year = request.form.get('year')
+        # 验证数据
+        if not g_title or not g_year or len(g_year)>4 or len(g_title)>20:
+            flash('输入错误！')
+            return redirect(url_for('index'))
+        # 将数据保存到数据库    
+        mov = Movie(title=g_title,year=g_year)
+        db.session.add(mov)
+        db.session.commit()
+        flash('提交成功！')
+        return redirect(url_for('index'))
 
     return render_template('index.html',movie=movie)
 
@@ -80,3 +92,7 @@ def page_not_found(e):
 def common_user():
     user = User.query.first()
     return dict(user=user)
+
+
+
+
