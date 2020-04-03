@@ -34,16 +34,14 @@ class Movie(db.Model):
 # views 视图函数
 @app.route('/')
 def index():
-    name = 'ahu'
-    movie = [
-        {'title':"大赢家",'year':"2020"},
-        {'title':"囧妈",'year':"2020"},
-        {'title':"疯狂外星人",'year':"2019"},
-        {'title':"战狼",'year':"2017"}
-    ]
-    return render_template('index.html',name=name,movie=movie)
+    
+    user = User.query.first() # 查询出来的用户记录
+    movie = Movie.query.all()
+
+    return render_template('index.html',user=user,movie=movie)
 
 # 自定义命令
+# 建立空数据库
 @app.cli.command() # 注册为命令
 @click.option('--drop',is_flag=True,help="先删除在创建")
 def initdb(drop):
@@ -51,3 +49,21 @@ def initdb(drop):
         db.drop_all()
     db.create_all()
     click.echo("初始化数据库完成！")
+
+# 向数据库插入数据
+@app.cli.command()
+def forge():
+    name = 'ahu'
+    movie = [
+        {'title':"大赢家",'year':"2020"},
+        {'title':"囧妈",'year':"2020"},
+        {'title':"疯狂外星人",'year':"2019"},
+        {'title':"战狼",'year':"2017"}
+    ]
+    user = User(name=name)
+    db.session.add(user)
+    for m in movie:
+        mov = Movie(title=m['title'],year=m['year'])
+        db.session.add(mov)
+    db.session.commit()
+    click.echo("导入数据完成！")
