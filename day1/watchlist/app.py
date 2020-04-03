@@ -38,7 +38,7 @@ def index():
     user = User.query.first() # 查询出来的用户记录
     movie = Movie.query.all()
 
-    return render_template('index.html',user=user,movie=movie)
+    return render_template('index.html',movie=movie)
 
 # 自定义命令
 # 建立空数据库
@@ -72,4 +72,11 @@ def forge():
 @app.errorhandler(404)
 def page_not_found(e):
     user = User.query.first()
-    return render_template('404.html',user=user)
+    return render_template('404.html')
+
+
+# 模板上下文出力函数
+@app.context_processor
+def common_user():
+    user = User.query.first()
+    return dict(user=user)

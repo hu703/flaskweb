@@ -33,3 +33,38 @@ footer{
 .movie_list li:hover{
     background-color: rgb(231, 226, 226);
 }
+
+nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+nav ul li{
+    float: left;
+}
+nav ul li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 8px 12px;
+    text-decoration: none;
+}
+nav ul li a:hover{
+    background-color: #888;
+}
+.btn{
+    float: right;
+}
+.bd{
+    font-size: 12px;
+    font-weight: bold;
+    color: rgba(165, 144, 144, 0.712);
+    text-decoration: none;
+    padding: 3px 5px;
+}
+.bd:hover{
+    color: cadetblue;
+    font-size: 13px;
+}
