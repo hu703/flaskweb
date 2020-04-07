@@ -19,13 +19,22 @@
     <nav>
         <ul>
             <li><a href="{{ url_for('index') }}">首页</a></li>
+            {% if not current_user.is_authenticated %}
+                <li><a href="{{ url_for('login') }}">登录</a></li>
+            {% else %}
+                <li>{{ current_user.name }}</li>
+            {% endif %}
+            {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('logout') }}">退出</a></li>
+                <li><a href="{{ url_for('setting') }}">设置</a></li>
+            {% endif %}
         </ul>
     </nav>
     {% block content %}
     {% endblock %}
 
     <footer>
-        <small>&copy;2020 &nbsp;&nbsp;&nbsp;  <a href="">1903c</a></small>
+        <small>&copy;2020 &nbsp;&nbsp;&nbsp;  <a href="{{ url_for('index') }}">1903c</a></small>
     </footer>
 
 
