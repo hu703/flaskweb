@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdn.bootcss.com/jquery/3.4.0/jquery.min.js">
     <style>
         .con{
             width: 40%;
@@ -51,20 +50,26 @@
                 </div>
             </li>
             <li>
-                <div class='removed'>
+                <div class='checkbox'>
                     <label for="">
                         <input class='js-item' type="checkbox">榴莲
                     </label>
                 </div>
             </li>
         </ul>
+        <div class="footer">
+            <span>改变你的标题</span>
+            <input type="text" class='js-change' placeholder="我的购物车清单">
+        </div>
     </div>
 </body>
 <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
+        // 添加到购物车
         function onAdd(){
             var $ul,$li,$label,$div,value
+            // 获取输入表单的值
             value = $('.js-new').val();
             if(value === ''){
                 return;
@@ -74,16 +79,31 @@
             $li = $('<li>').appendTo($ul)
             $div = $('<div>').addClass('checkbox').appendTo($li)
             $label = $('<label>').appendTo($div)
-            $('<input>').addClass('js-item').attr('type','checkbox').appendTo($label)    
-            // 获取输入表单的值
-            
+            // 将input添加到label里  .click()添加点击事件
+            $('<input>').addClass('js-item').attr('type','checkbox').appendTo($label).click(toogeRemoved)    
             // 添加标签用appendTo,添加文字用append
             // 下级添加到上级里，用appendTo,上级里添加下级，用append
             $label.append(value)
 
+        }
+
+        function toogeRemoved(ev){
+            // 获取当前点击的对象  closest 是遍历
+            $(ev.currentTarget).closest('li').toggleClass('removed')
+
 
         }
+
+        function titleChange(){
+            // h2标签就会随着.js-change发生改变
+            $('h2').text($(".js-change").val())
+        }
+
         $('.js-add').click(onAdd)
+        $('.js-item').click(toogeRemoved)
+        // keyup() 只要输入数据都会触发
+        $('.js-change').keyup(titleChange)
+        
     })
 </script>
 </html>
