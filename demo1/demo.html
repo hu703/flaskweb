@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>前端HTM css javescript体验课</title>
+    <!-- 内部样式 -->
+    <style>
+        .box{
+            width: 200px;
+            height: 200px;
+            text-align: center;
+            color: cadetblue;
+            font-size: 50px;
+            border: 1px solid cadetblue;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 行内样式 -->
+    <div class='box' id='box'>
+        1903 
+    </div>
+    <div class="con" id='con'>阿呼</div>
+
+</body>
+<script>
+    // 获取元素
+    var oBox = document.getElementById('box')
+    oBox.onclick = function(){
+        alert('你点击了我')
+    }
+    var oCon = document.getElementById('con')
+
+</script>
+
+</html>
