@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todolist计时器</title>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container" id="app">
+        <h2>
+            <span>倒计时</span>
+            <button v-on:click='start'>
+                <i class="glyphicon glyphicon-play"></i>
+            </button>
+        </h2>
+        <div class="well">
+            <div class="dao-timer">
+                <span>{{ minute }}</span>:<span>{{ second }}</span>
+            </div>
+        </div>
+    </div>
+</body>
+<!-- <script src="https://cdn.bootcss.com/vue/2.6.11/vue.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    // ES6 定义常量 用的是 const 这个方法
+    const WORK_STATES = {
+        WORK:'工作',       //定义两种工作状态
+        REST:'休息'
+    }
+    const WORKING_TIME_LENGTH_IN_MINUTES = 25       // 工作时常25分钟
+    const RESTING_TIME_LENGTH_IN_MIUUTES = 00       // 工作时常 5 分钟
+    new Vue({
+        el:'#app',
+        data:{
+            minute:WORKING_TIME_LENGTH_IN_MINUTES,
+            second:0,
+            workState:WORK_STATES.WORK,
+            timestamp:0
+        },
+        methods:{
+            start:function(){
+                this._tick()
+                this.interval = setInterval(this._tick,1000);
+            },
+            _tick:function(){
+                // second 不是0， second减1就行
+                if(this.second !== 0){
+                    this.second--;
+                    return;
+                }
+                // second 是0 ，minute 不是0，minute-1 second 从0 换到59 
+                if(this.minute !==0){
+                    this.minute--;
+                    this.second = 59;
+                    return;
+                }
+                // second 是0， minute 也是0 ，切换工作状态，切换倒计时时间
+                this.workState = this.workState===WORK_STATES.WORK?WORK_STATES.REST:WORK_STATES.WORK
+                if(this.workState === WORK_STATES.WORK){
+   

@@ -28,7 +28,7 @@
     <div class="con" id='app'>
         <h2>{{ title }}</h2>
         <div class='inp_shop'>
-            <input v-model='newItem' type="text" placeholder="输入你想购买的物品">
+            <input v-model='newItem' v-on:keyup.enter='showItem' type="text" placeholder="输入你想购买的物品">
             <span class='btu'>
                 <button v-on:click='addItem' class='btn btn-default'>添加到购物车</button>
             </span>
@@ -81,6 +81,9 @@
                     })
                 };
                 this.newItem = ''
+            },
+            showItem:function(){
+
             }
         }
     })
