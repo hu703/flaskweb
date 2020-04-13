@@ -41,14 +41,20 @@
             <!-- v-model 双向数据绑定 -->
             <change-title-component></change-title-component>
         </div>
-
+        <div>
+            {{ num }}的平方是<span v-square='num'></span>
+        </div>
     </div>
 
 
 </body>
-<!-- <script src="https://cdn.bootcss.com/vue/2.6.11/vue.esm.js"></script> -->
+<!-- <script src="https://scdn.bootcss.com/vue/2.6.11/vue.esm.js"></script> -->
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script>
+    // 自定义指令square v-square
+    Vue.directive('square', function (el, binding) {
+        el.innerHTML = Math.pow(binding.value,2)
+    })
     var data = {
         items: [{
                 text: '苹果',
@@ -60,7 +66,8 @@
             }
         ],
         title: "me的购物车",
-        newItem: ''
+        newItem: '',
+        num:10
     }
     // 创建列表组件
     var ItemsComponents = Vue.extend({

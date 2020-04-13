@@ -11,22 +11,11 @@
 
 <body>
     <div class="con" id='app'>
-        <h2>
-            <span>倒计时</span>
-            <button class="btn btn-default" :disabled="state==='start'" v-on:click="start()">
-                <span class="glyphicon glyphicon-play"></span>
-            </button>
-            <button class="btn btn-default" :disabled="state!=='start'" v-on:click="pause()">
-                <span class="glyphicon glyphicon-pause"></span>
-            </button>
-            <button class="btn btn-default" :disabled="state!=='start'&&state!=='pause'" v-on:click="stop()">
-                <span class="glyphicon glyphicon-stop"></span>
-            </button>
-        </h2>
+        <but-component></but-component>
+
         <h3>{{ workState }}</h3>
-        <div class="time">
-            <span>{{ min }}</span>:<span>{{ sec }}</span>
-        </div>
+        <time-component></time-component>
+        
     </div>
     
 
@@ -46,29 +35,17 @@
         STOPED:'stop',
         PAUSE:'pause'
     }
-    new Vue({
-        el:"#app",
-        data:{
-            minute:WORK_TIME,
-            second:0,
-            workState:WORK_STATES.WORK,
-            state:STATES.STOPED
-        },
-        // 当分钟数或秒数小于10时变为0n
-        computed: {
-            // 计算属性的 getter
-            min: function () {
-                if(this.minute<10){
-                    return '0'+this.minute;
-                }
-                return this.minute
-            },
-            sec:function(){
-                if(this.second<10){
-                    return '0'+this.second;
-                }
-                return this.second
-            }
+    const data={
+        minute:WORK_TIME,
+        second:0,
+        workState:WORK_STATES.WORK,
+        state:STATES.STOPED
+    }
+    
+
+    var ButComponent = Vue.extend({
+        data:function(){
+            return data;
         },
         methods:{
             start:function(){
@@ -87,8 +64,6 @@
                 this.minute = WORK_TIME
                 this.second = 0
             },
-
-
             _tick:function(){
                 // second 不是0，second-1
                 if(this.second != 0){
@@ -110,10 +85,54 @@
                 }
 
             }
-        }
+        },
+        template:
+            '<h2>'+
+                '<span>倒计时</span>'+           
+                '<button class="btn btn-default" :disabled="state==="start"" v-on:click="start()">'+
+                    '<span class="glyphicon glyphicon-play"></span>'+
+                '</button>'+
+                '<button class="btn btn-default" :disabled="state!=="start"" v-on:click="pause()">'+
+                    '<span class="glyphicon glyphicon-pause"></span>'+
+                '</button>'+
+                '<button class="btn btn-default" :disabled="state!=="start"&&state!=="pause"" v-on:click="stop()">'+
+                    '<span class="glyphicon glyphicon-stop"></span>'+
+                '</button>'+
+            '</h2>'
+    });
+    var TimeComponent = Vue.extend({
+        data:function(){
+            return data;
+        },
+        computed: {
+            // 计算属性的 getter
+            min: function () {
+                if(this.minute<10){
+                    return '0'+this.minute;
+                }
+                return this.minute
+            },
+            sec:function(){
+                if(this.second<10){
+                    return '0'+this.second;
+                }
+                return this.second
+            }
+        },
+        template:
+            '<div class="time">'+
+                '<span>{{ min }}</span>:<span>{{ sec }}</span>'+
+            '</div>'
     })
 
+    Vue.component('but-component',ButComponent);
+    Vue.component('time-component',TimeComponent);
 
+
+    new Vue({
+        el:"#app",
+        data:data
+    })
 
 </script>
 
