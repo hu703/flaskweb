@@ -1,69 +1,68 @@
 <template>
-  <div class='body'>
-    <div class="app_head">
-      <div class="app_head_inner">
+  <div class="body">
+    <div class="app-head">
+      <div class="app-head-inner">
         <img src="./assets/logo.png" alt="">
         <div class="head-nav">
-          <ul class='nav-list'>
-            <li>登陆</li>
-            <li class='pile'>|</li>
+          <ul class="nav-list">
+            <li>登录</li>
+            <li class="nav-pile">|</li>
             <li>注册</li>
-            <li class='pile'>|</li>
+            <li class="nav-pile">|</li>
             <li>关于</li>
           </ul>
         </div>
       </div>
     </div>
-    <div class="app_content">
+    <div class="app-content">
       <router-view></router-view>
     </div>
-    <div class="app_footer">
-      <p>&copy; 1903c - 2020</p>
+    <div class="app-footer">
+      <p>&copy;1903C-2020</p>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-
 }
 </script>
 
 <style scoped>
+/* layout样式 */
 .body{
   background: #f0f2f5;
   font-size: 15px;
   color: #444;
   font-family: 幼圆;
 }
-.app_head{
+.app-head{
   background: #363636;
-  color: #b2b2b2;
+  color:#b2b2b2;
   height: 90px;
   line-height: 90px;
   width: 100%;
 }
-.app_head_inner{
+.app-head-inner{
   width: 1200px;
-  height: 90px;
   margin: 0 auto;
 }
-.app_head_inner img{
+.app-head-inner img{
   float: left;
   width: 50px;
   margin-top: 20px;
 }
 .head-nav{
-  float:right
+  float: right;
 }
 .head-nav li{
   float: left;
   cursor: pointer;
 }
-.head-nav .pile{
+.nav-pile{
   padding: 0 10px;
 }
-.app_footer{
+.app-footer{
   text-align: center;
   height: 80px;
   line-height: 80px;
@@ -71,12 +70,11 @@ export default {
   background: #e3e4e8;
   margin-top: 30px;
 }
-.app_content{
+.app-content{
   width: 1200px;
   margin: 0 auto;
 }
-
-/* 重置样式 */
+/* reset重置样式 */
 html,body,div,span,applet,object,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video {
 	margin:0;
 	padding:0;
@@ -116,5 +114,4 @@ a:focus {
 input:focus,select:focus,textarea:focus {
 	outline:-webkit-focus-ring-color auto 0;
 }
-  
 </style>
