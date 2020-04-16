@@ -2,7 +2,7 @@
   <div class='body'>
     <div class="app_head">
       <div class="app_head_inner">
-        <img src="./assets/logo.png" alt="">
+        <img src="./assets/logo.png" alt=""><span class='app-title'>王者英雄历史</span>
         <div class="head-nav">
           <ul class='nav-list'>
             <li>登陆</li>
@@ -116,5 +116,10 @@ a:focus {
 input:focus,select:focus,textarea:focus {
 	outline:-webkit-focus-ring-color auto 0;
 }
-  
+.app-title{
+  color:#f0f2f5;
+  font-size:30px;
+  font-weight: bolder;
+  margin-left: 40px;
+}
 </style>
