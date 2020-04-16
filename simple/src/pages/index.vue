@@ -19,6 +19,7 @@
       </div>
       <div class="index-left-block lastest-news">
         <h2>最新消息</h2>
+        <div>{{newlist}}</div>
         <ul>
           <li v-for="item in newlist">
             <a v-bind:href="item.url">{{ item.title }}</a>
@@ -28,35 +29,13 @@
     </div>
     <!-- 右边内容部分 -->
     <div class="index-right">
-      <div style="width:900px;height:300px;margin:20px auto;background:#20B2AA;">将来是用组件代替</div>
+      <slider-component></slider-component> 
       <div class="index-board-list">
-        <div class="index-board-item">
+        <div class="index-board-item" v-for='item in boardlist'>
           <div class="index-board-item-inner">
-            <h2>第一个</h2>
-            <p>第一个商品描述</p>
-            <div class="index-board-butten">立即购买</div>
-          </div>
-        </div>
-
-        <div class="index-board-item">
-          <div class="index-board-item-inner">
-            <h2>第一个</h2>
-            <p>第一个商品描述</p>
-            <div class="index-board-butten">立即购买</div>
-          </div>
-        </div>
-        <div class="index-board-item">
-          <div class="index-board-item-inner">
-            <h2>第一个</h2>
-            <p>第一个商品描述</p>
-            <div class="index-board-butten">立即购买</div>
-          </div>
-        </div>
-        <div class="index-board-item">
-          <div class="index-board-item-inner">
-            <h2>第一个</h2>
-            <p>第一个商品描述</p>
-            <div class="index-board-butten">立即购买</div>
+            <h2>{{item.title}}</h2>
+            <p>{{item.decoration}}</p>
+            <div v-if='item.saleout' class="index-board-butten">立即购买</div>
           </div>
         </div>
       </div>
@@ -64,111 +43,52 @@
   </div>
 </template>
 <script>
-import axios from "axios"; // 引入
+import axios from "axios";
+import SliderComponent from '../components/silderComponent'
 
 export default {
+  components:{
+    SliderComponent
+  },
   mounted() {
-    axios
-      .get("api/getNewList")
-      // 请求成功后的代码
-      .then(res => {
-        console.log(res);
-        this.newlist = res.data.list;
-      })
-      // 出现错误执行的代码
-      .catch(error => {
-        console.log(error);
-      });
-    axios
-      .get("api/getProductList")
-      // 请求成功后的代码
-      .then(res => {
-        console.log(res);
-        this.productList = res.data.list;
-      })
-      // 出现错误执行的代码
-      .catch(error => {
-        console.log(error);
-      });
+    axios.post('api/getnewList')  /* 接口 */
+    .then((res) => {      /*请求成功*/  
+      console.log(res)    /*打印 */
+      this.newList = res.data.list
+    })
+    .catch((error) => {   /* 请求失败 */
+      console.log(error)
+    });
+    // axios.get("api/getProductList")
+    //   // 请求成功后的代码
+    // .then((res) => {
+    //   console.log(res)
+    //   this.productList = res.data
+    // })
+    // // 出现错误执行的代码
+    // .catch(error => {
+    //   console.log(error);
+    // });
+    //   axios
+    //   .get("api/getBoardList")
+    //   // 请求成功后的代码
+    //   .then(res => {
+    //     console.log(res)
+    //     this.boardlist = res.data.list
+    //   })
+    //   // 出现错误执行的代码
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
   },
   data() {
     return {
-      newlist: [
-        {
-          title: "镜",
-          url: "https://baike.sogou.com/v7056.htm"
-        },
-        {
-          title: "王昭君",
-          url:
-            "https://baike.sogou.com/v57933.htm?fromTitle=%E7%8E%8B%E6%98%AD%E5%90%9B"
-        },
-        {
-          title: "貂蝉",
-          url:
-            "https://baike.sogou.com/v18595.htm?fromTitle=%E8%B2%82%E8%9D%89",
-          hot: true
-        },
-        {
-          title: "阿珂",
-          url:
-            "https://baike.sogou.com/v260877.htm?fromTitle=%E9%98%BF%E7%8F%82"
-        }
-      ],
-      productList: {
-        pc: {
-          title: "王者女英雄",
-          list: [
-            {
-              title: "小妲己",
-              url: "https://baike.sogou.com/v7056.htm"
-            },
-            {
-              title: "王昭君",
-              url:
-                "https://baike.sogou.com/v57933.htm?fromTitle=%E7%8E%8B%E6%98%AD%E5%90%9B"
-            },
-            {
-              title: "貂蝉",
-              url:
-                "https://baike.sogou.com/v18595.htm?fromTitle=%E8%B2%82%E8%9D%89",
-              hot: true
-            },
-            {
-              title: "阿珂",
-              url:
-                "https://baike.sogou.com/v260877.htm?fromTitle=%E9%98%BF%E7%8F%82"
-            }
-          ]
-        },
-        app: {
-          title: "王者男英雄类",
-          last: true,
-          list: [
-            {
-              title: "李白",
-              url: "#"
-            },
-            {
-              title: "凯爹",
-              url: "#",
-              hot: true
-            },
-            {
-              title: "韩信",
-              url: "#"
-            },
-            {
-              title: "云中君",
-              url: "#",
-              hot: true
-            }
-          ]
-        }
-      }
-    };
+      newList:[],
+      productList:null,
+      boardlist:null
+    }
   }
-};
+}
 </script>
 <style scoped>
 .wrapper {
@@ -185,7 +105,7 @@ export default {
 .index-left-block {
   margin: 15px;
   background: #ffffff;
-  border-radius: 0 0 10px 10px;
+  border-radius: 0 0 10px px;
   box-shadow: 0 0 1px #dddddd;
 }
 .index-left-block .hr {
