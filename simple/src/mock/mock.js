@@ -1,4 +1,4 @@
-import Mock from 'mockjs'
+import Mocks from 'mockjs'
 
 // Mock.mock(/getNewList/,{
 //     'list|5':[{
@@ -6,7 +6,7 @@ import Mock from 'mockjs'
 //         'title':'@ctitle(5,20)'  // 加@c
 //     }]
 // })
-Mock.mock(/getnewList/, {
+Mocks.mock('/', {
     'list|5': [{
       'url': '@url',
       'title': '@ctitle(5,20)'
@@ -84,4 +84,4 @@ Mock.mock(/getnewList/, {
 //         saleout:'@boolean'
 //     },
 // ])
-export default Mock
+export default Mocks

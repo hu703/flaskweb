@@ -19,9 +19,8 @@
       </div>
       <div class="index-left-block lastest-news">
         <h2>最新消息</h2>
-        <div>{{newlist}}</div>
         <ul>
-          <li v-for="item in newlist">
+          <li v-for="item in newList">
             <a v-bind:href="item.url">{{ item.title }}</a>
           </li>
         </ul>
@@ -51,9 +50,9 @@ export default {
     SliderComponent
   },
   mounted() {
-    axios.post('api/getnewList')  /* 接口 */
+    axios.get('/')  /* 接口 */
     .then((res) => {      /*请求成功*/  
-      console.log(res)    /*打印 */
+      console.log(res.data)    /*打印 */
       this.newList = res.data.list
     })
     .catch((error) => {   /* 请求失败 */
