@@ -24,6 +24,8 @@
   </div>
 </template>
 
+
+
 <script>
 import MyLogin from './components/login'
 export default {
