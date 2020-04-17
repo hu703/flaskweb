@@ -3,9 +3,10 @@
         
         <div class="silder-wrapper" @mouseover='clearInv' @mouseout='runInv'>
             <!-- 四张轮播图 -->
-            <div v-show="nowIndex === index" class="silder-item item1" v-bind:class="['item'+[index+1]]" v-for='(imgUrl,index) in sliderImgList' v-bind:key='index'>
+            <div v-show="nowIndex === index" class="silder-item item1" v-bind:class="['item'+[index+1]]" v-for='(item,index) in sliderImgList' v-bind:key='index' >
                 <a href="">
-                    <img v-bind:src="imgUrl" alt="" style='width:900px;height:500px'>
+                    <img v-bind:src="item.imgUrl" alt="" style='width:900px;height:500px'>
+                    <h3 class='title'>{{ item.title }}</h3>
                 </a>
             </div>
             
@@ -16,6 +17,7 @@
 
             <!-- 下方圆点 -->
             <ul class='silder-dots'>
+                <!-- 绑定点击事件                  循环[item:图片][index+1 第几张图片]     绑定数据-->
                 <li v-on:click="clickDots(index)" v-for="(item,index) in sliderImgList" v-bind:key="index">{{ index+1 }}</li>
             </ul>
         </div>
@@ -29,11 +31,23 @@ export default {
             nowIndex:0, // 显示第几张图片 在模板里设置了一个v-show，添加到条件
             // 添加图片需要用到require
             sliderImgList:[
-                require('../assets/pic1.jpg'),
-                require('../assets/pic2.jpg'),
-                require('../assets/pic3.jpg'),
-                require('../assets/pic4.jpg'),
-            ]
+                {
+                    imgUrl:require('../assets/pic1.jpg'),
+                    title:'爱你的心满满'
+                },
+                {
+                    imgUrl:require('../assets/pic2.jpg'),
+                    title:'把你的心都填满'
+                },
+                {
+                    imgUrl:require('../assets/pic3.jpg'),
+                    title:'爱可儿呀'
+                },
+                {
+                    imgUrl:require('../assets/pic4.jpg'),
+                    title:'涵涵好可爱哦'
+                },
+            ],
         }
     },
     methods: {
@@ -142,5 +156,17 @@ export default {
     }
     .next-btn{
         right: 10px;
+    }
+    .title{
+        background: #000;
+        font-size:20px;
+        color: white;
+        width: 300px;
+        height: 30px;
+        line-height: 30px;
+        position: absolute;
+        bottom: 154px;
+        z-index: 300px;
+        opacity: 0.6;
     }
 </style>
