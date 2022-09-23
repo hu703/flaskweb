@@ -22,7 +22,7 @@ mysql-connector-python==8.0.18
 mysqlclient==1.4.6
 numpy==1.17.4
 Pillow==6.1.0
-protobuf==3.11.3
+protobuf==3.18.3
 pymongo==3.10.0
 PyMySQL==0.9.3
 pyparsing==2.4.5
